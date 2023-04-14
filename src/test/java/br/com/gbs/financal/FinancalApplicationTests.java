@@ -1,6 +1,6 @@
 package br.com.gbs.financal;
 
-import br.com.gbs.financal.model.dto.TipoRequestDTO;
+import br.com.gbs.financal.model.dto.TipoListagemDTO;
 import br.com.gbs.financal.model.entities.Tipo;
 import br.com.gbs.financal.repositories.TipoRepository;
 import br.com.gbs.financal.services.TipoService;
@@ -26,7 +26,7 @@ class FinancalApplicationTests {
 
 
 	Tipo tipo;
-	TipoRequestDTO requestDTO;
+	TipoListagemDTO requestDTO;
 	Long id = 1L;
 
 	@BeforeEach
@@ -35,7 +35,7 @@ class FinancalApplicationTests {
 		tipo = new Tipo("Teste");
 		tipo.setId(1L);
 
-		requestDTO = new TipoRequestDTO(1L, "Request DTO");
+		requestDTO = new TipoListagemDTO(1L, "Request DTO");
 	}
 
 	@Test

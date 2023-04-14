@@ -13,6 +13,7 @@ import javax.validation.constraints.NotBlank;
 @Builder
 public class TipoRequestDTO {
 
+    private Long id;
     @NotBlank(message = "Campo obrigatório")
     private String descricao;
 }

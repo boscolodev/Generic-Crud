@@ -35,9 +35,7 @@ class FinancalApplicationTests {
 		tipo = new Tipo("Teste");
 		tipo.setId(1L);
 
-
-
-		requestDTO = new TipoRequestDTO("Request DTO");
+		requestDTO = new TipoRequestDTO(1L, "Request DTO");
 	}
 
 	@Test
@@ -48,7 +46,7 @@ class FinancalApplicationTests {
 
 
 		Assertions.assertNotNull(result);
-		Assertions.assertInstanceOf(TipoRequestDTO.class, result);
+		Assertions.assertInstanceOf(requestDTO.getClass(), result);
 
 	}
 

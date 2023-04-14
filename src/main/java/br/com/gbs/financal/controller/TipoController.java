@@ -2,6 +2,7 @@ package br.com.gbs.financal.controller;
 
 import br.com.gbs.financal.model.dto.GenericDTO;
 import br.com.gbs.financal.model.dto.TipoRequestDTO;
+import br.com.gbs.financal.model.entities.Tipo;
 import br.com.gbs.financal.services.TipoService;
 import br.com.gbs.financal.services.TipoTeste;
 import br.com.gbs.financal.util.MapperUtil;
@@ -34,7 +35,7 @@ public class TipoController {
 
     @ResponseStatus(HttpStatus.OK)
     @GetMapping("/{id}")
-    public TipoRequestDTO findById(@Valid @PathVariable final Long id){
+    public Tipo findById(@Valid @PathVariable final Long id){
         return service.findById(id);
     }
 

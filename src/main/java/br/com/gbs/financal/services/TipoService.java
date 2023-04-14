@@ -26,13 +26,8 @@ public class TipoService {
     }
 
     @Transactional(readOnly = true)
-    public TipoRequestDTO findById(final Long id){
-        System.out.println(id);
-        var a = repository.findById(id);
-        System.out.println(a.get().getDescricao());
-
-        return MapperUtil.converte(repository.findById(id).orElseThrow( ()-> new DataBaseException("Registro não existe"))
-                , TipoRequestDTO.class);
+    public Tipo findById(final Long id){
+        return repository.findById(id).orElseThrow(()-> new DataBaseException("Erro ao localizar o registro"));
     }
 
     @Transactional

@@ -1,16 +1,16 @@
 package br.com.gbs.financal.services;
 
-import br.com.gbs.financal.model.entities.Tipo;
-import br.com.gbs.financal.repositories.TipoRepository;
+import br.com.gbs.financal.model.entities.ExampleEntity;
+import br.com.gbs.financal.repositories.ExampleRepositoryImp;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Service;
 
 @Service
 @RequiredArgsConstructor
-public class TipoTeste implements GenericService<Tipo, Long> {
+public class ExampleServiceImp implements GenericService<ExampleEntity, Long> {
 
-    private final TipoRepository repository;
+    private final ExampleRepositoryImp repository;
 
     @Override
     public void beforeSave() {
@@ -18,7 +18,7 @@ public class TipoTeste implements GenericService<Tipo, Long> {
     }
 
     @Override
-    public JpaRepository<Tipo, Long> getRepository() {
+    public JpaRepository<ExampleEntity, Long> getRepository() {
         return repository;
     }
 }

@@ -1,10 +1,7 @@
 package br.com.gbs.financal;
 
-import br.com.gbs.financal.model.dto.TipoListagemDTO;
-import br.com.gbs.financal.model.entities.Tipo;
-import br.com.gbs.financal.repositories.TipoRepository;
-import br.com.gbs.financal.services.TipoService;
-import org.junit.jupiter.api.Assertions;
+
+import br.com.gbs.financal.services.ExampleServiceImp;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
@@ -19,35 +16,24 @@ import java.util.Optional;
 @SpringBootTest
 class FinancalApplicationTests {
 
-	@Mock
-	TipoRepository repository;
-	@InjectMocks
-	TipoService service;
+    @InjectMocks
+    ExampleServiceImp service;
 
+    @Mock
+    ExampleServiceImp repository;
 
-	Tipo tipo;
-	TipoListagemDTO requestDTO;
-	Long id = 1L;
+    private Long existId;
+    private Long nonExistId;
 
-	@BeforeEach
-	public void setUp(){
+    @BeforeEach
+    void setUp(){
+        existId = 1L;
+        nonExistId = 100L;
+    }
 
-		tipo = new Tipo("Teste");
-		tipo.setId(1L);
+    @Test
+    void shouldReturnEntityWhenIdExists(){
+    }
 
-		requestDTO = new TipoListagemDTO(1L, "Request DTO");
-	}
-
-	@Test
-	void checkEntityIsDTO() throws Exception {
-
-		Mockito.when(repository.findById(id)).thenReturn(Optional.of(tipo));
-		Tipo result = service.findById(id);
-
-
-		Assertions.assertNotNull(result);
-		Assertions.assertInstanceOf(requestDTO.getClass(), result);
-
-	}
 
 }

@@ -1,11 +1,9 @@
 package br.com.gbs.financal.model;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
+import java.io.Serializable;
 import java.util.Objects;
 
 @MappedSuperclass
@@ -13,14 +11,17 @@ import java.util.Objects;
 @NoArgsConstructor
 @Getter
 @Setter
-public class BaseEntity {
+public class BaseEntity implements Serializable {
+    private static final long serialVersionUID = 1L;
+
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(name = "VERSION")
     @Version
-    private Long version = 0L;
+    private Long version;
 
     @Override
     public boolean equals(Object o) {
@@ -29,9 +30,17 @@ public class BaseEntity {
         BaseEntity that = (BaseEntity) o;
         return Objects.equals(id, that.id);
     }
-
     @Override
     public int hashCode() {
         return Objects.hash(id);
     }
+
+    @Override
+    public String toString() {
+        return "BaseEntity{" +
+                "id=" + id +
+                ", version=" + version +
+                '}';
+    }
+
 }

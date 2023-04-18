@@ -6,12 +6,14 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 public interface GenericService<T, ID> {
 
     JpaRepository<T, ID> getRepository();
 
+    @Transactional(readOnly = true)
     default T findById(final ID id) {
         return getRepository().findById(id)
                 .orElseThrow(() -> new DataBaseException("Erro ao localizar o registro " + id));
@@ -22,21 +24,25 @@ public interface GenericService<T, ID> {
         getRepository().deleteById(id);
     }
 
+    @Transactional
     default T save(final T entity) {
         beforeSave();
         return getRepository().save(entity);
     }
 
-    default void update(final ID id, final T entity) {
-        var entityDB = findById(id);
-        MapperUtil.copyEntity(entity, entityDB);
-        save(entity);
+    @Transactional
+    default T update(final ID id, final T entity) {
+        T result = findById(id);
+        MapperUtil.copyEntity(entity, result);
+        return save(result);
     }
 
+    @Transactional(readOnly = true)
     default Page<T> findAll(final Pageable pageable) {
-        return findAll(pageable);
+        return getRepository().findAll(pageable);
     }
 
-    default void beforeSave() {}
+    default void beforeSave() {
+    }
 
 }
